@@ -10,6 +10,8 @@
     </data>
 
     <RelativeLayout
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,18 +22,74 @@
             android:layout_height="90dp"/>
 
         <TextView
-            android:layout_alignRight="@id/img"
+            android:layout_toRightOf="@id/img"
             style="@style/TextAppearance.AppCompat.Large"
             android:id="@+id/nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{des.nombre}"/>
-        <TextView
-            android:layout_alignRight="@id/img"
-            android:layout_below="@id/nombre"
+            android:text="@{des.nombre}"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:paddingTop="2dp"
+            android:id="@+id/precio"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text='@{""+des.cantidad}'/>
+            android:layout_toRightOf="@id/img"
+            android:layout_below="@id/nombre">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_precio"/>
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{""+des.precio}'/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingTop="2dp"
+            android:id="@+id/peso"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/img"
+            android:layout_below="@id/precio">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_peso"/>
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{des.cantidad+" Lts"}'/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingTop="2dp"
+            android:id="@+id/dir"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/img"
+            android:layout_below="@id/peso">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dir"/>
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{des.ciudad}'/>
+        </LinearLayout>
 
     </RelativeLayout>
 </layout>

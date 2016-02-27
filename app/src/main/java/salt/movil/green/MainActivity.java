@@ -1,5 +1,6 @@
 package salt.movil.green;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.PersistableBundle;
 import android.support.design.widget.NavigationView;
@@ -15,7 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.AdapterView;
 
 import com.squareup.picasso.Picasso;
 
@@ -25,8 +26,10 @@ import java.util.List;
 import salt.movil.green.adapters.AdapterDes;
 import salt.movil.green.databinding.ActivityMainBinding;
 import salt.movil.green.models.Desecho;
+import salt.movil.green.models.Empresa;
+import salt.movil.green.utils.DatosQuemados;
 
-public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
+public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener, AdapterView.OnItemClickListener {
 
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
@@ -35,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     ActivityMainBinding binding;
     List<Desecho> data;
 
-    ImageView imgHeaderDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,54 +62,23 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         navigationView.setNavigationItemSelectedListener(this);
 
         quemarDatos();
-
+        binding.containerList.setOnItemClickListener(this);
     }
 
+    //region quemar datos
     private void quemarDatos() {
-        data = new ArrayList<>();
-
-        Desecho desecho1 = new Desecho();
-        desecho1.setNombre("Salchichas dañadas");
-        desecho1.setCantidad(25);
-        desecho1.setUrlImg("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSavzaCW70NEExWCJUMYNRCRKkuPjuNGetrvOkNfd2I4QKA176G");
-
-        Desecho desecho2 = new Desecho();
-        desecho2.setNombre("Suero de queso");
-        desecho2.setCantidad(25);
-        desecho2.setUrlImg("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSavzaCW70NEExWCJUMYNRCRKkuPjuNGetrvOkNfd2I4QKA176G");
-
-        Desecho desecho3 = new Desecho();
-        desecho3.setNombre("Huesos de marrano");
-        desecho3.setCantidad(65);
-        desecho3.setUrlImg("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSavzaCW70NEExWCJUMYNRCRKkuPjuNGetrvOkNfd2I4QKA176G");
-
-        Desecho desecho4 = new Desecho();
-        desecho4.setNombre("deseños tecnologicos");
-        desecho4.setCantidad(28);
-        desecho4.setUrlImg("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSavzaCW70NEExWCJUMYNRCRKkuPjuNGetrvOkNfd2I4QKA176G");
-
-        Desecho desecho5 = new Desecho();
-        desecho5.setNombre("Desecho de carbon");
-        desecho5.setCantidad(10);
-        desecho5.setUrlImg("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSavzaCW70NEExWCJUMYNRCRKkuPjuNGetrvOkNfd2I4QKA176G");
-
-        Desecho desecho6 = new Desecho();
-        desecho6.setNombre("Astillas de madera");
-        desecho6.setCantidad(56);
-        desecho6.setUrlImg("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSavzaCW70NEExWCJUMYNRCRKkuPjuNGetrvOkNfd2I4QKA176G");
-
-        data.add(desecho1);
-        data.add(desecho2);
-        data.add(desecho3);
-        data.add(desecho4);
-        data.add(desecho5);
-        data.add(desecho6);
-
+        DatosQuemados dq =  new DatosQuemados();
+        data = dq.getData();
         AdapterDes adapterDes = new AdapterDes(data,getLayoutInflater());
         binding.containerList.setAdapter(adapterDes);
 
 
     }
+
+    public List<Desecho> getData(){
+        return data;
+    }
+    //endregion
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -203,5 +174,12 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
             nombres.add(d.getNombre());
         }
         return nombres;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(this,DetalleActivity.class);
+        intent.putExtra("posicion",position);
+        startActivity(intent);
     }
 }

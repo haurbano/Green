@@ -14,6 +14,7 @@ public class Desecho extends BaseObservable {
     String extras;
     String nombre;
     String urlImg;
+    String ciudad;
 
     public Desecho() {
     }
@@ -79,5 +80,13 @@ public class Desecho extends BaseObservable {
 
     public void setUrlImg(String urlImg) {
         this.urlImg = urlImg;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
 }
