@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Filtros">
+        <menu>
+            <item
+                android:title="Mas vendidos"
+                android:icon="@drawable/ic_vendidos"
+                />
+            <item
+                android:title="Cerca de ti"
+                android:icon="@drawable/ic_cerca"/>
+            </menu>
+    </item>
+    <item
+        android:title="Perfil">
+        <menu>
+            <item
+                android:title="Salir"
+                android:icon="@drawable/ic_exit"
+                />
+        </menu>
+    </item>
+
+
+
+</menu>
